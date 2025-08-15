@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Mostra il banner solo se i cookie non sono stati ancora accettati
-  if (localStorage.getItem('cookiesAccepted') === 'true') return;
+  // Mostra il banner solo se i cookie non sono ancora stati accettati o rifiutati
+  if (localStorage.getItem('cookiesAccepted') === 'true' || localStorage.getItem('cookiesAccepted') === 'false') return;
 
   const banner = document.createElement('div');
   banner.id = 'gdpr-banner';
@@ -15,14 +15,22 @@ document.addEventListener('DOMContentLoaded', function () {
   banner.style.zIndex = '1000';
 
   banner.innerHTML = `
-    Questo sito utilizza cookie per migliorare l'esperienza utente.
+    Questo sito utilizza cookie per migliorare l'esperienza utente.<br>
     <button id="accept-cookies">Accetto</button>
+    <button id="reject-cookies">Rifiuto</button>
   `;
 
   document.body.appendChild(banner);
 
+  // Accetta i cookie
   document.getElementById('accept-cookies').addEventListener('click', function () {
     localStorage.setItem('cookiesAccepted', 'true');
+    banner.remove();
+  });
+
+  // Rifiuta i cookie
+  document.getElementById('reject-cookies').addEventListener('click', function () {
+    localStorage.setItem('cookiesAccepted', 'false');
     banner.remove();
   });
 });
