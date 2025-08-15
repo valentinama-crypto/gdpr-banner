@@ -9,6 +9,15 @@
   <h1>Benvenuto!</h1>
   <p>Questa è una pagina di test per il GDPR banner.</p>
 
+  <button onclick="resetCookies()">Reset Cookie</button>
+
+  <script>
+    function resetCookies() {
+      localStorage.removeItem('cookiesChoice');
+      location.reload();
+    }
+  </script>
+
   <script src="gdpr-banner.js" defer></script>
 </body>
 </html>
